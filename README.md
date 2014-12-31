@@ -39,9 +39,9 @@ npm install -g watchify
       --assets
         --index.css
         --bg.png
-      --modules
+      --src (模块化代码库)
+        --index.js
       --fis-conf.js
-      --index.js
       --index.html
 
 > 建议是这种文件夹目录，当然你可以通过 fis-conf.js 修改。在index.html的 head末尾加入
@@ -49,7 +49,7 @@ npm install -g watchify
 > 以下代码<!-- @require app --><!--SCRIPT_PLACEHOLDER--><!--RESOURCEMAP_PLACEHOLDER-->
 
 ### 命令映射
-    fis.config.merge({
+    module.exports = {
         settings: {
             command: {
                 '': 'release -b',
@@ -61,19 +61,31 @@ npm install -g watchify
                 'stop': 'server stop',
                 'open': 'server open'
             }
+        },
+        roadmap: {
+            ext: {
+                coffee: 'js'
+            },
+            path: [
+                {
+                  ... 
+                }
+            ]
         }
-    })
+    }
+
 
 ### browserify 配置
-    fis.config.merge({
+    module.exports = {
         settings: {
-                browserify: {
+            browserify: {
                 main: 'index.coffee',
                 output: '_app.js',  //不建议修改
                 transform: 'coffee-reactify',
                 extension: '.coffee'
             }
         }
-    })
+    }
+
 
 > 如果使用 browserify 的插件，如 coffee-reactify，需另外安装：npm install coffee-reactify --save-dev

@@ -1,12 +1,88 @@
-var process   = require('child_process');
+var proc   = require('child_process');
 var fis       = module.exports = require('fis');
 var commander = fis.cli.commander = require('commander');
 
+fis.config.set('project.exclude', /node_modules\/(?!bootstrap).*/);
+fis.config.set('project.watch.exclude', [/src/]);
+fis.config.merge({
+    modules: {
+        postpackager : ['autoload', 'simple'],
+        parser: {
+            scss: 'sass',
+            less: 'less'
+        }
+    },
+    settings: {
+        postpackager: {
+            simple: {
+                autoCombine: true,
+                output: 'dist/app'
+            }
+        }, 
+        browserify: {
+            main: 'src/index.js',
+            output: '_app.js',
+            // transform: 'coffee-reactify',
+            // extension: '.coffee'
+        },
+        command: {
+            '': 'release -b',
+            'w': 'release -bw',
+            'wL': 'release -bwL',
+            'op': 'release -bop',
+            'opm': 'release -bopm',
+            'start': 'server start',
+            'stop': 'server stop',
+            'open': 'server open',
+            'clean': 'server clean'
+        }
+    },
+    roadmap: {
+        ext : {
+            scss: 'css',
+            less: 'less'
+        },
+        path: [
+            {
+                reg : /^\/assets\/(.*)\.(css|scss|sass|less)$/i,
+                release : 'css/$1.css',
+                id: '$1.css'
+            },
+            {
+                reg : /^\/assets\/(.*)$/i,
+                release : 'img/$1',
+            },
+            {
+                reg : /^\/widgets\/([^\/]+)\/assets\/index\.(css|scss|sass|less)$/i,
+                id : 'widgets/$1.css',
+                release : 'css/$1/index.css'
+            },
+            {
+                reg : /^\/widgets\/([^\/]+)\/assets\/(.*)$/i,
+                release : 'img/$1/$2'
+            },
+            {
+                id: 'app',
+                reg: '_app.js',
+                release: 'dist/app.js'
+            },
+            {
+                reg: 'node_modules/**',
+                release: false
+            }
+        ]
+    }
+});
+
+if(fis.util.isFile(process.env.PWD + '/fis-conf.js')) {
+    var projectConf = require(process.env.PWD + '/fis-conf.js');
+    if(projectConf) {
+        fis.config.merge(projectConf);
+    }
+}
+
 fis.cli.name = 'mfn';
 fis.cli.info = fis.util.readJSON(__dirname + '/package.json');
-
-fis.config.set('project.exclude', /node_modules\/(?!bootstrap).*/);
-fis.config.set('project.watch.exclude', [/modules/]);
 
 function hasArgv(argv, search){
     var pos = argv.indexOf(search);
@@ -20,7 +96,6 @@ function hasArgv(argv, search){
 }
 
 function exeCmd(argv) {
-        
     var cmd = fis.require('command', argv[2]);
     cmd.register(
         commander
@@ -82,12 +157,12 @@ fis.cli.run = function(argv){
             argv[3] = argv[3].replace('b', '');
             var params = buildParams()
             if(argv[3].indexOf('w') !== -1) {
-                process.exec('watchify ' + params, function(a, b, error) {
+                proc.exec('watchify ' + params, function(a, b, error) {
                     console.error(error);
                 });
                 exeCmd(argv);
             }else {
-                process.exec('browserify ' + params, function(a, b, error) {
+                proc.exec('browserify ' + params, function(a, b, error) {
                     console.error(error);
                     exeCmd(argv);
                 });
@@ -98,67 +173,4 @@ fis.cli.run = function(argv){
     }
 };
 
-fis.config.merge({
-    modules: {
-        postpackager : ['autoload', 'simple'],
-        parser: {
-            scss: 'sass',
-            less: 'less'
-        }
-    },
-    settings: {
-        postpackager: {
-            simple: {
-                autoCombine: true,
-                output: 'dist/app'
-            }
-        }, 
-        browserify: {
-            main: 'index.js',
-            output: '_app.js',
-            // transform: 'coffee-reactify',
-            // extension: '.coffee'
-        },
-        command: {
-            '': 'release -b',
-            'w': 'release -bw',
-            'wL': 'release -bwL',
-            'op': 'release -bop',
-            'opm': 'release -bopm',
-            'start': 'server start',
-            'stop': 'server stop',
-            'open': 'server open'
-        }
-    },
-    roadmap: {
-        ext : {
-            scss: 'css',
-            less: 'less'
-        },
-        path: [
-            {
-                reg : /^\/assets\/(.*)\.(css|scss|sass|less)$/i,
-                release : 'css/$1.css',
-                id: '$1.css'
-            },
-            {
-                reg : /^\/assets\/(.*)$/i,
-                release : 'img/$1',
-            },
-            {
-                reg : /^\/widgets\/([^\/]+)\/assets\/index\.(css|scss|sass|less)$/i,
-                id : 'widgets/$1.css',
-                release : 'css/$1/index.css'
-            },
-            {
-                reg : /^\/widgets\/([^\/]+)\/assets\/(.*)$/i,
-                release : 'img/$1/$2'
-            },
-            {
-                id: 'app',
-                reg: '_app.js',
-                release: 'dist/app.js'
-            }
-        ]
-    }
-});
+
