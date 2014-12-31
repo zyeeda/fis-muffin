@@ -23,6 +23,10 @@ FIS browerify 解决方案
 ## 使用
 npm install -g fis-muffin
 
+npm install -g fis-postpackager-autoload
+
+npm install -g fis-postpackager-simple
+
 mfn release
 
 mfn server start
