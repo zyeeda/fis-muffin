@@ -43,7 +43,7 @@ npm install -g watchify
       --fis-conf.js
       --index.html
 
-> 建议是这种文件夹目录，当然你可以通过 fis-conf.js 修改。在index.html的 head末尾加入
+> 建议目录结果，当然你可以通过 fis-conf.js 修改。在index.html的 head末尾加入
 > 以下代码 <!-- @require index.css --><!--STYLE_PLACEHOLDER-->，body末尾加入
 > 以下代码<!-- @require app --><!--SCRIPT_PLACEHOLDER--><!--RESOURCEMAP_PLACEHOLDER-->
 
@@ -59,6 +59,10 @@ npm install -g watchify
                 'start': 'server start',
                 'stop': 'server stop',
                 'open': 'server open'
+                'clean': 'server clean'
+            },
+            browserify: {
+                ...
             }
         },
         roadmap: {
@@ -72,6 +76,7 @@ npm install -g watchify
             ]
         }
     }
+    fis.config.set('project.exclude', [...]);
 
 <table>
   <tr>
