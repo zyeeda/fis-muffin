@@ -1,14 +1,19 @@
-var proc   = require('child_process');
+var proc      = require('child_process');
 var fis       = module.exports = require('fis');
 var commander = fis.cli.commander = require('commander');
 
-fis.config.set('project.exclude', /node_modules\/(?!bootstrap).*/);
-fis.config.set('project.watch.exclude', [/src/]);
 fis.config.merge({
+    project: {
+        exclude: [/node_modules\/(?!bootstrap).*/, /node_modules\/bootstrap\/(?!dist).*/],
+        watch: {
+            exclude: [/src|widgets/]
+        }
+    },
     modules: {
         postpackager : ['autoload', 'simple'],
         parser: {
             scss: 'sass',
+            sass: 'sass',
             less: 'less'
         }
     },
@@ -40,46 +45,60 @@ fis.config.merge({
     roadmap: {
         ext : {
             scss: 'css',
-            less: 'less'
-        },
-        path: [
-            {
-                reg : /^\/assets\/(.*)\.(css|scss|sass|less)$/i,
-                release : 'css/$1.css',
-                id: '$1.css'
-            },
-            {
-                reg : /^\/assets\/(.*)$/i,
-                release : 'img/$1',
-            },
-            {
-                reg : /^\/widgets\/([^\/]+)\/assets\/index\.(css|scss|sass|less)$/i,
-                id : 'widgets/$1.css',
-                release : 'css/$1/index.css'
-            },
-            {
-                reg : /^\/widgets\/([^\/]+)\/assets\/(.*)$/i,
-                release : 'img/$1/$2'
-            },
-            {
-                id: 'app',
-                reg: '_app.js',
-                release: 'dist/app.js'
-            },
-            {
-                reg: 'node_modules/**',
-                release: false
-            }
-        ]
+            less: 'css',
+            sass: 'css'
+        }
     }
 });
 
+var defaultPath = [
+    {
+        reg : /^\/assets\/(.*)\.(css|scss|sass|less)$/i,
+        release : 'css/$1.css',
+        id: '$1.css'
+    },
+    {
+        reg : /^\/assets\/(.*)$/i,
+        release : 'img/$1',
+    },
+    {
+        reg : /^\/widgets\/([^\/]+)\/assets\/index\.(css|scss|sass|less)$/i,
+        id : 'widgets/$1.css',
+        release : 'css/$1/index.css'
+    },
+    {
+        reg : /^\/widgets\/([^\/]+)\/assets\/(.*)$/i,
+        release : 'img/$1/$2'
+    },
+    {
+        id: 'app',
+        reg: '_app.js',
+        release: 'dist/app.js'
+    },
+    {
+        reg: 'node_modules/bootstrap/**',
+        release: false
+    },
+    {
+        reg: 'node_modules/**',
+        release: false
+    }
+];
+
+var projectPath = [];
 if(fis.util.isFile(process.env.PWD + '/fis-conf.js')) {
     var projectConf = require(process.env.PWD + '/fis-conf.js');
     if(projectConf) {
+        if(projectConf.roadmap && projectConf.roadmap.path) {
+            projectPath = projectConf.roadmap.path;
+        }
         fis.config.merge(projectConf);
     }
 }
+
+// 因为 merge 后， path 会反向，所以这么做
+var path = projectPath.concat(defaultPath);
+fis.config.set('roadmap.path', path);
 
 fis.cli.name = 'mfn';
 fis.cli.info = fis.util.readJSON(__dirname + '/package.json');
