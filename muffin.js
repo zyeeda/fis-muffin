@@ -4,8 +4,8 @@ var fis     = module.exports = require('fis');
 fis.cli.name = 'mfn';
 fis.cli.info = fis.util.readJSON(__dirname + '/package.json');
 
-fis.config.set('project.exclude', /node_modules\/(?!colorvest).*/);
-fis.config.set('project.watch.exclude', [/modules|widgets/]);
+fis.config.set('project.exclude', /node_modules\/(?!bootstrap).*/);
+fis.config.set('project.watch.exclude', [/modules/]);
 
 function hasArgv(argv, search){
     var pos = argv.indexOf(search);
@@ -85,7 +85,8 @@ fis.config.merge({
     modules: {
         postpackager : ['autoload', 'simple'],
         parser: {
-            scss: 'sass'
+            scss: 'sass',
+            less: 'less'
         }
     },
     settings: {
@@ -104,7 +105,8 @@ fis.config.merge({
     },
     roadmap: {
         ext : {
-            scss : 'css'
+            scss: 'css',
+            less: 'less'
         },
         path: [
             {
