@@ -34,6 +34,20 @@ npm install -g watchify
 
 ...
 ## 使用
+### 目录结构
+    webapp
+      --assets
+        --index.css
+        --bg.png
+      --modules
+      --fis-conf.js
+      --index.js
+      --index.html
+
+> 建议是这种文件夹目录，当然你可以通过 fis-conf.js 修改。在index.html的 head末尾加入
+> 以下代码 <!-- @require index.css --><!--STYLE_PLACEHOLDER-->，body末尾加入
+> 以下代码<!-- @require app --><!--SCRIPT_PLACEHOLDER--><!--RESOURCEMAP_PLACEHOLDER-->
+
 ### 命令映射
     fis.config.merge({
         settings: {
