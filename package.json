@@ -1,7 +1,7 @@
 {
-    "name": "muffin",
-    "version": "0.0.1",
-    "description": "pack node code",
+    "name": "fis-muffin",
+    "version": "0.0.2",
+    "description": "FIS browerify 解决方案",
     "main": "muffin.js",
     "dependencies": {
         
@@ -11,6 +11,14 @@
         "fis": "latest"
     },
     "scripts": {
+        "start": "mfn"
+    },
+    "bugs": {
+        "url": "https://github.com/zyeeda/fis-muffin/issues"
+    },
+    "homepage": "https://github.com/zyeeda/fis-muffin",
+    "bin": {
+        "mfn": "bin/mfn"
     },
     "author": "cheft",
     "license": "ISC"
