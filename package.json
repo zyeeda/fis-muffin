@@ -1,14 +1,14 @@
 {
     "name": "fis-muffin",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "FIS browerify 解决方案",
     "main": "muffin.js",
     "dependencies": {
-        
-    },
-    "devDependencies": {
         "commander": "^1.3.2",
         "fis": "latest"
+    },
+    "devDependencies": {
+        
     },
     "scripts": {
         "start": "mfn"

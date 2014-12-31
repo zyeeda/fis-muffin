@@ -2,6 +2,7 @@
 FIS browerify 解决方案
 
 ## 特点
+* 命令行简化（'mfn start' = 'mfn server start'）
 * `coffee`、`react`、`coffee&react` 语言支持
 * `sass`、`less` 语言支持 
 * 代码模块化，采用 Node 方式
@@ -15,18 +16,50 @@ FIS browerify 解决方案
 * 支持在 js 中直接引入 css 
 * 编译性能非常快
 
-## 考虑
+## 进行中
 * 考虑支持编译预处理
 * 考虑支持引入 amd 、cmd、node 、global 方式的代码库
 * 考虑发布后支持三种引入方式 `requirejs-seed` 、`browserify-seed`、`global-seed`
 
-## 使用
+## 安装 & 插件安装
 npm install -g fis-muffin
 
 npm install -g fis-postpackager-autoload
 
 npm install -g fis-postpackager-simple
 
-mfn release
+npm install -g browserify
 
-mfn server start
+npm install -g watchify
+
+...
+## 使用
+### 命令映射
+    fis.config.merge({
+        settings: {
+            command: {
+                '': 'release -b',
+                'w': 'release -bw',
+                'wL': 'release -bwL',
+                'op': 'release -bop',
+                'opm': 'release -bopm',
+                'start': 'server start',
+                'stop': 'server stop',
+                'open': 'server open'
+            }
+        }
+    })
+
+### browserify 配置
+    fis.config.merge({
+        settings: {
+                browserify: {
+                main: 'index.coffee',
+                output: '_app.js',  //不建议修改
+                transform: 'coffee-reactify',
+                extension: '.coffee'
+            }
+        }
+    })
+
+> 如果使用 browserify 的插件，如 coffee-reactify，需另外安装：npm install coffee-reactify --save-dev

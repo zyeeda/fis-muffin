@@ -1,5 +1,6 @@
-var process = require('child_process');
-var fis     = module.exports = require('fis');
+var process   = require('child_process');
+var fis       = module.exports = require('fis');
+var commander = fis.cli.commander = require('commander');
 
 fis.cli.name = 'mfn';
 fis.cli.info = fis.util.readJSON(__dirname + '/package.json');
@@ -19,7 +20,6 @@ function hasArgv(argv, search){
 }
 
 function exeCmd(argv) {
-    var commander = fis.cli.commander = require('commander');
         
     var cmd = fis.require('command', argv[2]);
     cmd.register(
@@ -31,8 +31,26 @@ function exeCmd(argv) {
     commander.parse(argv);
 }
 
+function convertArgs(argv) {
+    var conf = fis.config.get('settings.command');
+    var key = '';
+    if(argv[2]) {
+        key = argv[2];
+    }
+    if(conf[key]) {
+        if(key.length > 0) {
+            argv.pop();
+        }
+        var as = conf[key].split(' ');
+        for(var i = 0; i < as.length; i++) {
+            argv.splice(2 + i, 0, as[i]);
+        }   
+    }
+    return argv;
+}
+
 function buildParams() {
-    var conf = fis.config.get('settings.postpackager.browserify');
+    var conf = fis.config.get('settings.browserify');
     var params = '';
     if(conf.transform) {
         if(conf.transform instanceof Array) {
@@ -54,17 +72,16 @@ fis.cli.run = function(argv){
         fis.cli.colors.mode = 'none';
     }
     
-    var first = argv[2];
-    if(argv.length < 3 || first === '-h' ||  first === '--help'){
+    if(argv[2] === '-h' ||  argv[2] === '--help'){
         fis.cli.help();
-    } else if(first === '-v' || first === '--version'){
+    } else if(argv[2] === '-v' || argv[2] === '--version'){
         fis.cli.version();
-    } else if(first[0] === '-'){
-        fis.cli.help();
     } else {
-        if(first === 'release') {
+        argv = convertArgs(argv);
+        if(argv[2] === 'release' && argv[3] && argv[3].indexOf('b') != -1) {
+            argv[3] = argv[3].replace('b', '');
             var params = buildParams()
-            if(argv[3] && argv[3].indexOf('w') !== -1) {
+            if(argv[3].indexOf('w') !== -1) {
                 process.exec('watchify ' + params, function(a, b, error) {
                     console.error(error);
                 });
@@ -94,13 +111,23 @@ fis.config.merge({
             simple: {
                 autoCombine: true,
                 output: 'dist/app'
-            },
-            browserify: {
-                main: 'main.js',
-                output: 'dist/app.js',
-                // transform: 'coffee-reactify',
-                // extension: '.coffee'
             }
+        }, 
+        browserify: {
+            main: 'index.js',
+            output: '_app.js',
+            // transform: 'coffee-reactify',
+            // extension: '.coffee'
+        },
+        command: {
+            '': 'release -b',
+            'w': 'release -bw',
+            'wL': 'release -bwL',
+            'op': 'release -bop',
+            'opm': 'release -bopm',
+            'start': 'server start',
+            'stop': 'server stop',
+            'open': 'server open'
         }
     },
     roadmap: {
@@ -110,16 +137,16 @@ fis.config.merge({
         },
         path: [
             {
-                reg : /^\/assets\/(.*)\.(scss)$/i,
+                reg : /^\/assets\/(.*)\.(css|scss|sass|less)$/i,
                 release : 'css/$1.css',
                 id: '$1.css'
             },
             {
                 reg : /^\/assets\/(.*)$/i,
-                release : 'css/$1.css',
+                release : 'img/$1',
             },
             {
-                reg : /^\/widgets\/([^\/]+)\/assets\/index\.(scss)$/i,
+                reg : /^\/widgets\/([^\/]+)\/assets\/index\.(css|scss|sass|less)$/i,
                 id : 'widgets/$1.css',
                 release : 'css/$1/index.css'
             },
@@ -128,34 +155,9 @@ fis.config.merge({
                 release : 'img/$1/$2'
             },
             {
-                reg: /\/dist\/fonts\/(.*)$/i,
-                release: 'font/$1'
-            },
-            {   
-                reg: 'dist/css/bootstrap.min.css',
-                release: 'css/bootstrap.css',
-                id: 'bootstrap.css'
-            },
-            {
                 id: 'app',
-                reg: 'dist/app.js',
+                reg: '_app.js',
                 release: 'dist/app.js'
-            },
-            {
-                reg: 'dist/app.css',
-                release: 'dist/app.css'
-            },
-            {
-                reg: 'index.html',
-                release: 'index.html'
-            },
-            {   
-                reg: 'dist/**',
-                release: false
-            },
-            {
-                reg: '**',
-                release: false
             }
         ]
     }
