@@ -2,24 +2,23 @@
 FIS browerify 解决方案
 
 ## 特点
-* 命令行简化（'mfn start' = 'mfn server start'）
-* `coffee`、`react`、`coffee&react` 语言支持
-* `sass`、`less` 语言支持 
-* 代码模块化，采用 Node 方式
-* 代码库采用 npm 管理
-* 所有 css 压缩打包成一个
-* 所有 js 压缩打包成一个
-* 图片优化压缩、碎小图片支持内嵌
+* FIS 集成 browerify，具备两工具功能，前端代码从此可以用 node 框架进行测试了
+* 简化命令行（`mfn = fis release`）并支持自定义，妈妈再也不用担心我 release 和 server 敲混了
+* `coffee`、`react`、`coffee&react` 语言支持，没有插件支持的告诉我，我来帮你写
+* `sass`、`less` 语言支持，同上
+* 代码模块化，采用 Node 方式，写前端跟写node后端一样的爽
+* 代码库采用 npm 管理，`npm install jquery --save` 一条命令搞定一个库
+* 所有 js 压缩打包成一个，不只；所有 css 压缩也能打包成一个，静态资源的路径自动更新哟
+* 图片优化压缩、碎小图片支持内嵌，fis 有的它都有
 * 发布后日志语句自动删除
-* 发布目录整理，图片等静态资源的引入路径自动更改
-* 支持 `watch` 方式开发 
-* 支持在 js 中直接引入 css 
-* 编译性能非常快
+* 发布目录重新整理，还你干干净净
+* 支持 `watch` 方式开发，一边敲代码，浏览器及时刷新；最重要的是编译性能非常之快
+* 支持在 js 中直接引入 css，css 也能模块化了，也不用担心忘记加载了
 
 ## 进行中
 * 考虑支持编译预处理
-* 考虑支持引入 amd 、cmd、node 、global 方式的代码库
-* 考虑发布后支持三种引入方式 `requirejs-seed` 、`browserify-seed`、`global-seed`
+* 考虑支持引入 amd 、cmd、node 、global 的代码库
+* 考虑发布后提供 `requirejs-seed` 、`browserify-seed`、`global-seed`
 
 ## 安装 & 插件安装
 npm install -g fis-muffin
@@ -73,6 +72,39 @@ npm install -g watchify
             ]
         }
     }
+
+<table>
+  <tr>
+    <th>FIS 命令</th><th>Muffin 对应命令</th><th>作用</th>
+  </tr>
+  <tr>
+    <td>fis release</td><td>mfn</td><td>简单发布</td>
+  </tr>
+  <tr>
+    <td>fis release -w</td><td>mfn w</td><td>发布并监视</td>
+  </tr>
+  <tr>
+    <td>fis release -wL</td><td>mfn wL</td><td>发布并监视浏览器刷新</td>
+  </tr>
+  <tr>
+    <td>fis release -op</td><td>mfn op</td><td>压缩打包</td>
+  </tr>
+  <tr>
+    <td>fis release -opm</td><td>mfn opm</td><td>压缩打包并加上md5文件戳</td>
+  </tr>
+  <tr>
+    <td>fis server start</td><td>mfn start</td><td>启动服务打开浏览器</td>
+  </tr>
+  <tr>
+    <td>fis server stop</td><td>mfn stop</td><td>停止服务</td>
+  </tr>
+  <tr>
+    <td>fis server open</td><td>mfn open</td><td>打开发布目录</td>
+  </tr>
+  <tr>
+    <td>fis server clean</td><td>mfn start</td><td>清理发布目录</td>
+  </tr>
+</table>
 
 
 ### browserify 配置
