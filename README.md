@@ -43,9 +43,10 @@ npm install -g watchify
       --fis-conf.js
       --index.html
 
-> 建议目录结果，当然你可以通过 fis-conf.js 修改。在index.html的 head末尾加入
-> 以下代码 <!-- @require index.css --><!--STYLE_PLACEHOLDER-->，body末尾加入
-> 以下代码<!-- @require app --><!--SCRIPT_PLACEHOLDER--><!--RESOURCEMAP_PLACEHOLDER-->
+> 建议用此目录结构，当然你可以通过 fis-conf.js 修改
+
+> 在index.html的 head末尾加入以下代码 <!-- @require index.css --><!--STYLE_PLACEHOLDER--> 表示引入 css，
+> body末尾加入以下代码<!-- @require app --><!--SCRIPT_PLACEHOLDER--><!--RESOURCEMAP_PLACEHOLDER--> 表示引入 js
 
 ### 命令映射
     module.exports = {
