@@ -102,7 +102,7 @@ npm install -g watchify
     <td>fis server open</td><td>mfn open</td><td>打开发布目录</td>
   </tr>
   <tr>
-    <td>fis server clean</td><td>mfn start</td><td>清理发布目录</td>
+    <td>fis server clean</td><td>mfn clean</td><td>清理发布目录</td>
   </tr>
 </table>
 
