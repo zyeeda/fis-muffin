@@ -1,0 +1,11 @@
+*.
+*.swp
+*.bak
+*~
+*.~ml
+*.orig
+*.msi
+.DS_Store
+.settings
+.project
+node_modules
