@@ -179,12 +179,12 @@ fis.cli.run = function(argv){
             argv[3] = argv[3].replace('b', '');
             var params = buildParams()
             if(argv[3].indexOf('w') !== -1) {
-                proc.exec('watchify ' + params, function(a, b, error) {
+                proc.exec(__dirname + '/node_modules/.bin/watchify ' + params, function(a, b, error) {
                     console.error(error);
                 });
                 exeCmd(argv);
             }else {
-                proc.exec('browserify ' + params, function(a, b, error) {
+                proc.exec(__dirname + '/node_modules/.bin/browserify ' + params, function(a, b, error) {
                     console.error(error);
                     exeCmd(argv);
                 });

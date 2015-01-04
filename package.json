@@ -1,25 +1,29 @@
 {
-    "name": "fis-muffin",
-    "version": "0.0.6",
-    "description": "FIS browerify 解决方案",
-    "main": "muffin.js",
-    "dependencies": {
-        "commander": "^1.3.2",
-        "fis": "latest"
-    },
-    "devDependencies": {
-        
-    },
-    "scripts": {
-        "start": "mfn"
-    },
-    "bugs": {
-        "url": "https://github.com/zyeeda/fis-muffin/issues"
-    },
-    "homepage": "https://github.com/zyeeda/fis-muffin",
-    "bin": {
-        "mfn": "bin/mfn"
-    },
-    "author": "cheft",
-    "license": "ISC"
+  "name": "fis-muffin",
+  "version": "0.0.7",
+  "description": "FIS browerify 解决方案",
+  "main": "muffin.js",
+  "dependencies": {
+    "browserify": "^8.0.3",
+    "commander": "^1.3.2",
+    "fis": "latest",
+    "fis-parser-less": "^0.1.2",
+    "fis-parser-sass": "^0.2.3",
+    "fis-postpackager-autoload": "0.0.17",
+    "fis-postpackager-simple": "0.0.23",
+    "watchify": "^2.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "mfn"
+  },
+  "bugs": {
+    "url": "https://github.com/zyeeda/fis-muffin/issues"
+  },
+  "homepage": "https://github.com/zyeeda/fis-muffin",
+  "bin": {
+    "mfn": "bin/mfn"
+  },
+  "author": "cheft",
+  "license": "ISC"
 }

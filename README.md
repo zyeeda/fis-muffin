@@ -55,18 +55,8 @@ FIS browerify 解决方案
 * 考虑支持引入 amd 、cmd、node 、global 的代码库
 * 考虑发布后提供 `requirejs-seed` 、`browserify-seed`、`global-seed`
 
-## 安装 & 插件安装
+## 安装
 npm install -g fis-muffin
-
-npm install -g fis-postpackager-autoload
-
-npm install -g fis-postpackager-simple
-
-npm install -g browserify
-
-npm install -g watchify
-
-...
 
 ## 目录结构
     webapp
