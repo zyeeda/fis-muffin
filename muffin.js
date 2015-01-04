@@ -44,7 +44,8 @@ fis.config.merge({
             'start': 'server start',
             'stop': 'server stop',
             'open': 'server open',
-            'clean': 'server clean'
+            'clean': 'server clean',
+            'deploy': 'release -bop --dest local'
         }
     },
     roadmap: {
@@ -52,6 +53,12 @@ fis.config.merge({
             scss: 'css',
             less: 'css',
             sass: 'css'
+        }
+    },
+    deploy: {
+        local : {
+            to : './public',
+            exclude : /public|src|map.json|package.json|README.md/
         }
     }
 });
