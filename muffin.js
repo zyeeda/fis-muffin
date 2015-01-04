@@ -6,7 +6,7 @@ fis.config.merge({
     project: {
         exclude: [/node_modules\/(?!bootstrap).*/, /node_modules\/bootstrap\/(?!dist).*/],
         watch: {
-            exclude: [/src|widgets/]
+            exclude: [/src/]
         }
     },
     modules: {
@@ -22,6 +22,11 @@ fis.config.merge({
             simple: {
                 autoCombine: true,
                 output: 'dist/app'
+            },
+            autoload: {
+                notice: {
+                    exclude: [/_app.js/]
+                }
             }
         }, 
         browserify: {
@@ -60,15 +65,6 @@ var defaultPath = [
     {
         reg : /^\/assets\/(.*)$/i,
         release : 'img/$1',
-    },
-    {
-        reg : /^\/widgets\/([^\/]+)\/assets\/index\.(css|scss|sass|less)$/i,
-        id : 'widgets/$1.css',
-        release : 'css/$1/index.css'
-    },
-    {
-        reg : /^\/widgets\/([^\/]+)\/assets\/(.*)$/i,
-        release : 'img/$1/$2'
     },
     {
         id: 'app',
