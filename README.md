@@ -214,6 +214,7 @@ module.exports = {
 Muffin 具有各种特点能基本满足我们的日常开发需求，另外 FIS 也拥有丰富的功能等着你去发掘。其实 Muffin 也有不足，Browserify 打包成一个 js 后，调试稍有不便，必须通过一些关键代码来查找原来代码所在位置，当然相信这点点不足是不能成为阻碍的。
 
 ## Roadmap
+* 加入 sourcemap
 * 支持编译预处理
 * 发布三种模式的源代码 `requirejs-seed` 、`browserify-seed`、`global-seed`
 * 更多等待您的反馈
