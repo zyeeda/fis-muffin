@@ -4,7 +4,7 @@ var commander = fis.cli.commander = require('commander');
 
 fis.config.merge({
     project: {
-        exclude: [/node_modules\/(?!bootstrap).*/, /node_modules\/bootstrap\/(?!dist).*/],
+        exclude: [/public/, /node_modules\/(?!bootstrap).*/, /node_modules\/bootstrap\/(?!dist).*/],
         watch: {
             exclude: [/src/]
         }
@@ -14,7 +14,9 @@ fis.config.merge({
         parser: {
             scss: 'sass',
             sass: 'sass',
-            less: 'less'
+            less: 'less',
+            coffee: 'coffee-react',
+            jsx: 'jsx-react'
         }
     },
     settings: {
@@ -52,7 +54,9 @@ fis.config.merge({
         ext : {
             scss: 'css',
             less: 'css',
-            sass: 'css'
+            sass: 'css',
+            coffee: 'js',
+            jsx: 'js'
         }
     },
     deploy: {
