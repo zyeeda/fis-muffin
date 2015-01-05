@@ -179,6 +179,9 @@ module.exports = {
 ### 文件监视 & 自动刷新
 虽然集成了 Browserify，Muffin 也同样支持 watch 和 livereload 模式，而且速度还是很快。执行 `mfn wL` 命令来启用。
 
+### SourceMap
+开发模式中，会自动加入 sourcemap，方便调试，可直接定位到源代码，使用 `mfn op` 发布则会去掉 sourcemap
+
 ### 发布目录整理
 执行 `mfn deploy` 可将项目输出至 ./public 目录，目录非常整洁。
 
@@ -210,11 +213,7 @@ module.exports = {
 
     执行 `mfn start` 自动打开浏览器预览页面
 
-## 总结
-Muffin 具有各种特点能基本满足我们的日常开发需求，另外 FIS 也拥有丰富的功能等着你去发掘。其实 Muffin 也有不足，Browserify 打包成一个 js 后，调试稍有不便，必须通过一些关键代码来查找原来代码所在位置，当然相信这点点不足是不能成为阻碍的。
-
 ## Roadmap
-* 加入 sourcemap
 * 发布三种模式的源代码 `requirejs-seed` 、`browserify-seed`、`global-seed`
 * 更多等待您的反馈
 
