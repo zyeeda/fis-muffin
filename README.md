@@ -1,4 +1,4 @@
-# FIS + Browserify = Muffin
+# Muffin = FIS + Browserify
 
 ## 前言
 
@@ -179,7 +179,7 @@ module.exports = {
 ### 文件监视 & 自动刷新
 虽然集成了 Browserify，Muffin 也同样支持 watch 和 livereload 模式，而且速度还是很快。执行 `mfn wL` 命令来启用。
 
-### SourceMap
+### 支持 SourceMap
 开发模式中，会自动加入 sourcemap，方便调试，可直接定位到源代码，使用 `mfn op` 发布则会去掉 sourcemap
 
 ### 发布目录整理
@@ -195,7 +195,7 @@ module.exports = {
 
 ## 体验
 
-如果以上的 `特色` 打动了你，不妨从一个简单的 demo 开始体验 muffin 之旅吧。
+如果你对这些 `特色` 感兴趣，那么就从一个简单的 demo 开始体验 muffin 吧
 
 * 安装 muffin
 
