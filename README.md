@@ -215,7 +215,6 @@ Muffin 具有各种特点能基本满足我们的日常开发需求，另外 FIS
 
 ## Roadmap
 * 加入 sourcemap
-* 支持编译预处理
 * 发布三种模式的源代码 `requirejs-seed` 、`browserify-seed`、`global-seed`
 * 更多等待您的反馈
 
