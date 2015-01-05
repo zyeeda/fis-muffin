@@ -192,7 +192,7 @@ module.exports = {
 
 ## 体验
 
-如果以上的 `特色` 打动了你，不妨从一个简单的 demo 开始休验 muffin 之旅吧。
+如果以上的 `特色` 打动了你，不妨从一个简单的 demo 开始体验 muffin 之旅吧。
 
 安装 muffin
 
@@ -211,7 +211,7 @@ git clone https://github.com/cheft/muffin-demo.git
 执行 `mfn start` 自动打开浏览器预览页面
 
 ## 总结
-Muffin 具有各种特点能基本满足我们的日常开发需求，另外 FIS 也拥有丰富的功能等着你去发掘。当然 Muffin 也有不足，Browserify 打包成一个 js 后，调试稍有不便，必须通过一些关键代码来查找原来代码所在位置，当然相信这点点不足是不能成为阻碍的。
+Muffin 具有各种特点能基本满足我们的日常开发需求，另外 FIS 也拥有丰富的功能等着你去发掘。其实 Muffin 也有不足，Browserify 打包成一个 js 后，调试稍有不便，必须通过一些关键代码来查找原来代码所在位置，当然相信这点点不足是不能成为阻碍的。
 
 ## Roadmap
 * 支持编译预处理
