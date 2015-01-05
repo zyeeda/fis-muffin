@@ -13,7 +13,7 @@
 muffin 天生支持 `less`、`scss`、`coffee`、`react` 多种语言
 
 ### NPM 管理库
-项目采用 npm 管理 js 库依赖，方式完全跟 node 一样，下面是 [muffin-demo](https://github.com/cheft/muffin-demo) 的 package.json 配置；有了它，只要执行 `npm install` 可安装所有依赖库
+项目采用 npm 管理 js 库依赖，方式跟 node 完全一样，下面是 [muffin-demo](https://github.com/cheft/muffin-demo) 的 package.json 配置；有了它，只要执行 `npm install` 可安装所有依赖库
 ```js    
     {
       "name": "muffin-demo",
