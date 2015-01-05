@@ -1,4 +1,4 @@
-# Muffin = FIS + Browserify
+# Muffin=FIS+Browserify
 
 ## 前言
 
@@ -7,13 +7,14 @@
 ## 特色
 
 ### 简化安装
-执行 `npm install -g fis-muffin` 命令便可安装
+执行 __npm install -g fis-muffin__ 命令便可安装
 
 ### 多语言支持
-muffin 天生支持 `less`、`scss`、`coffee`、`react` 多种语言
+muffin 天生支持 __less__、__scss__、__coffee__、__react__ 多种语言
 
 ### NPM 管理库
-项目采用 npm 管理 js 库依赖，方式跟 node 完全一样，下面是 [muffin-demo](https://github.com/cheft/muffin-demo) 的 package.json 配置；有了它，只要执行 `npm install` 可安装所有依赖库
+项目采用 npm 管理 js 库依赖，方式跟 node 完全一样，下面是 [muffin-demo](https://github.com/cheft/muffin-demo) 的 package.json 配置；有了它，只要执行 __npm install__ 可安装所有依赖库
+
 ```js    
     {
       "name": "muffin-demo",
@@ -31,13 +32,14 @@ muffin 天生支持 `less`、`scss`、`coffee`、`react` 多种语言
       }
     }
 ```
-> 如果你还要用到其它库，比如 underscore，可以用 npm install underscore --save 安装
+> 如果你还要用到其它库，比如 underscore，可以用 __npm install underscore --save__ 安装
 > 
-> 或者你要用到其它插件，如 reactify，可以用 npm install reactify --save-dev 安装
+> 或者你要用到其它插件，如 reactify，可以用 __npm install reactify --save-dev__ 安装
 
 
 ### 集成 Browserify
 Browserify 可以让你使用类似于 node 的 requrie 方式来实现浏览器端 JavaScript 代码模块化
+
 ```js
     // hello.js
     var hello = function(name) {
@@ -46,6 +48,7 @@ Browserify 可以让你使用类似于 node 的 requrie 方式来实现浏览器
 
     module.exports = hello;
 ```
+
 
 ```js
     //index.js
@@ -69,16 +72,16 @@ muffin 默认是以 src/index.js 为入口文件，当然通过配置也可以�
           }
       }
   ```
-> browserify 支持多种插件，常用的有 coffee-reactify、reactify等
+> browserify 支持多种插件，常用的有 __coffee-reactify__、__reactify__ 等
 
 ### 命令简化
-只需 `mfn` 简单命令便可发布，`mfn start` 即开启浏览器预览
+只需 __mfn__ 简单命令便可发布，__mfn start__ 即开启浏览器预览
 
 ![命令简化](assets/command.jpg)
 
 <table>
   <tr>
-    <th style="width: 33%;">FIS 命令</th><th>Muffin 命令</th><th style="width: 50%;">作用</th>
+    <th style="width: 30%;text-align: left;">FIS 命令</th><th style="width: 30%;text-align: left;">Muffin 命令</th><th style="width: 40%;text-align: left;">作用</th>
   </tr>
   <tr>
     <td>fis release</td><td>mfn</td><td>简单发布</td>
@@ -110,7 +113,7 @@ muffin 默认是以 src/index.js 为入口文件，当然通过配置也可以�
 </table>
 
 > 如果上面命令不符合你的习惯，可以自己设置
-    
+
 ```js
   module.exports = {
         settings: {
@@ -127,7 +130,7 @@ muffin 默认是以 src/index.js 为入口文件，当然通过配置也可以�
             }
         }
     }
-```    
+```
 
 ### CSS 模块化
 不仅 js 可以模块化，css 同样可以。muffin 的静态资源目录是 assets，其中的样式文件都约定了 id。 因此在 css 或 js 中可通过 id 来引用样式文件：
@@ -137,7 +140,9 @@ muffin 默认是以 src/index.js 为入口文件，当然通过配置也可以�
   * @require bootstrap.css
   */
 ```
+
 在 coffee-script 中：
+
 ```coffee
     ###
     @require todo/todo.css
@@ -145,11 +150,13 @@ muffin 默认是以 src/index.js 为入口文件，当然通过配置也可以�
 ```
 
 在 html 中：
+
 ```html
     <!-- @require index.css -->
 ```
 
 如果觉得 muffin 提供的默认配置不符合需求，也可以自己配置：
+
 ```js
 module.exports = {
     roadmap: {
@@ -170,20 +177,20 @@ module.exports = {
 > 以上配置是将静态资源放在 modules 目录的每个模块下，每个模块自己管理静态资源；其它配置可自己扩展
 
 ### 性能优化
-通过 `mfn op` 命令可将 js 打包一个文件，css 也打包一个文件；一些细碎的图片(特别是svg)，建议 直接内嵌到css中，可大幅减少请求数量，提升前端性能。
+通过 __mfn op__ 命令可将 js 打包一个文件，css 也打包一个文件；一些细碎的图片(特别是svg)，建议 直接内嵌到css中，可大幅减少请求数量，提升前端性能。
 
 ![性能优化](assets/chrome.jpg)
 
 > 图中所请求图片资源其实是内嵌在css中，具体用法可看 [fis官方文档](http://fis.baidu.com/docs/more/fis-standard-inline.html#css)
 
 ### 文件监视 & 自动刷新
-虽然集成了 Browserify，Muffin 也同样支持 watch 和 livereload 模式，而且速度还是很快。执行 `mfn wL` 命令来启用。
+虽然集成了 Browserify，Muffin 也同样支持 watch 和 livereload 模式，而且速度还是很快。执行 __mfn wL__ 命令来启用。
 
 ### 支持 SourceMap
-开发模式中，会自动加入 sourcemap，方便调试，可直接定位到源代码，使用 `mfn op` 发布则会去掉 sourcemap
+开发模式中，会自动加入 sourcemap，方便调试，可直接定位到源代码，使用 __mfn op__ 发布则会去掉 sourcemap
 
 ### 发布目录整理
-执行 `mfn deploy` 可将项目输出至 ./public 目录，目录非常整洁。
+执行 __mfn deploy__ 可将项目输出至 __./public__ 目录，目录非常整洁。
 
 ![发布目录整理](assets/file.jpg)
 
@@ -195,25 +202,38 @@ module.exports = {
 
 ## 体验
 
-如果你对这些 `特色` 感兴趣，那么就从一个简单的 demo 开始体验 muffin 吧
+如果你对这些 __特色__ 感兴趣，那么就从一个简单的 demo 开始体验 muffin 吧
 
 * 安装 muffin
 
+```bash
     npm install -g fis-muffin
+```
 
 * 下载 demo
 
+```bash
     git clone https://github.com/cheft/muffin-demo.git
+```
 
-* 进入 muffin-demo 目录
+* 进入 muffin-demo 目录，安装第三方依赖库
 
-    执行 `npm install` 安装第三方库
+```bash
+    npm install
+```
 
-    执行 `mfn` 发布代码
+* 发布代码
 
-    执行 `mfn start` 自动打开浏览器预览页面
+```bash
+    mfn
+```
+
+*启动服务并打开浏览器预览
+
+```bash
+    mfn start
+```
 
 ## Roadmap
-* 发布三种模式的源代码 `requirejs-seed` 、`browserify-seed`、`global-seed`
+* 发布三种模式的源代码 __requirejs-seed__ 、__browserify-seed__、__global-seed__
 * 更多等待您的反馈
-
