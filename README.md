@@ -2,7 +2,7 @@
 
 ## 前言
 
-这段时间在做前端架构设计，需要选个好用的前端构建方案，之前[公司网站](http://www.zyeeda.com)有用过 [fis-pure](https://github.com/fex-team/fis-pure) ，因为这次需要用到 node 环境的一些自动化测试框架等一些需求， 所以 pure 就不太适合，因此就萌生出 [FIS](http://fis.baidu.com/) 集成 [Browserify](http://browserify.org/) 的想法。
+这段时间在做前端架构设计，需要选个好用的前端构建方案，之前[公司网站](http://www.zyeeda.com)有用过 [fis-pure](https://github.com/fex-team/fis-pure) ，因为这次需要用到 node 环境的一些自动化测试框架，pure 不太适合，因此就萌生出 [FIS](http://fis.baidu.com/) 集成 [Browserify](http://browserify.org/) 的想法。
 
 ## 特色
 
@@ -10,7 +10,7 @@
 执行 `npm install -g fis-muffin` 命令便可安装
 
 ### 多语言支持
-muffin 天生支持 less、scss、coffee、react 多种语言
+muffin 天生支持 `less`、`scss`、`coffee`、`react` 多种语言
 
 ### NPM 管理库
 项目采用 npm 管理 js 库依赖，方式完全跟 node 一样，下面是 [muffin-demo](https://github.com/cheft/muffin-demo) 的 package.json 配置；有了它，只要执行 `npm install` 可安装所有依赖库
@@ -37,7 +37,7 @@ muffin 天生支持 less、scss、coffee、react 多种语言
 
 
 ### 集成 Browserify
-Browserify 可以让你使用类似于 node 的 require() 方式来组织浏览器端的 Javascript 代码模块化
+Browserify 可以让你使用类似于 node 的 requrie 方式来实现浏览器端 JavaScript 代码模块化
 ```js
     // hello.js
     var hello = function(name) {
@@ -194,21 +194,21 @@ module.exports = {
 
 如果以上的 `特色` 打动了你，不妨从一个简单的 demo 开始体验 muffin 之旅吧。
 
-安装 muffin
+* 安装 muffin
 
-npm install -g fis-muffin
+    npm install -g fis-muffin
 
-下载 demo
+* 下载 demo
 
-git clone https://github.com/cheft/muffin-demo.git
+    git clone https://github.com/cheft/muffin-demo.git
 
-进入当前目录后
+* 进入 muffin-demo 目录
 
-执行 `npm install` 安装第三方库
+    执行 `npm install` 安装第三方库
 
-执行 `mfn` 发布代码
+    执行 `mfn` 发布代码
 
-执行 `mfn start` 自动打开浏览器预览页面
+    执行 `mfn start` 自动打开浏览器预览页面
 
 ## 总结
 Muffin 具有各种特点能基本满足我们的日常开发需求，另外 FIS 也拥有丰富的功能等着你去发掘。其实 Muffin 也有不足，Browserify 打包成一个 js 后，调试稍有不便，必须通过一些关键代码来查找原来代码所在位置，当然相信这点点不足是不能成为阻碍的。
