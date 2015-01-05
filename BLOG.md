@@ -7,10 +7,10 @@
 ## 特色
 
 ### 简化安装
-`npm install -g fis-muffin` 即安装，muffin 天生支持 less、scss、coffee、react 编译功能
+`npm install -g fis-muffin` 便安装，而且muffin 天生支持 less、scss、coffee、react 语言编译功能
 
 ### NPM 管理库
-代码库采用 npm 来管理 js 依赖库，方式完全跟 node 一样，以下是 [muffin-demo](https://github.com/cheft/muffin-demo) 的 package.json，`npm install` 即可安装依赖
+代码库采用 npm 来管理 js 依赖库，方式完全跟 node 一样，以下是 [muffin-demo](https://github.com/cheft/muffin-demo) 的 package.json；执行 `npm install` 可安装依赖
 ```js    
     {
       "name": "muffin-demo",
@@ -28,8 +28,9 @@
       }
     }
 ```
-> 如果你还要用到其它库，比如 underscore，可以用 npm install underscore --save 来安装
-> 或者你要用到其它插件，如如 reactify，可以用 npm install reactify --save-dev 来安装
+> 如果你还要用到其它库，比如 underscore，可以用 npm install underscore --save 安装
+> 
+> 或者你要用到其它插件，如如 reactify，可以用 npm install reactify --save-dev 安装
 
 
 ### 集成 Browserify
@@ -68,7 +69,7 @@ muffin 默认是以 src/index.js 为入口文件，当然通过配置也可以�
 > browserify 支持多种插件，常用的有 coffee-reactify、reactify等
 
 ### 命令简化
-只需 `mfn` 简单命令便可发布，`mfn start` 即可开启浏览器预览
+只需 `mfn` 简单命令便可发布，`mfn start` 即开启浏览器预览
 
 ![命令简化](assets/command.jpg)
 
@@ -126,7 +127,7 @@ muffin 默认是以 src/index.js 为入口文件，当然通过配置也可以�
 ```    
 
 ### CSS 模块化
-不仅 js 可以模块化，css 同样可以。muffin 的静态资源目录是 assets，其中的样式文件都约定了 id。 因此引用在 css 或 js 中使用以下代码引用样式文件：
+不仅 js 可以模块化，css 同样可以。muffin 的静态资源目录是 assets，其中的样式文件都约定了 id。 因此引用在 css 或 js 中通过 id 来引用样式文件：
 
 ```js
   /*
@@ -145,7 +146,7 @@ muffin 默认是以 src/index.js 为入口文件，当然通过配置也可以�
     <!-- @require index.css -->
 ```
 
-如果觉得 muffin 提供的默认配置不适合需求，你也可以自己配置：
+如果觉得 muffin 提供的默认配置不符合需求，也可以自己配置：
 ```js
 module.exports = {
     roadmap: {
@@ -173,15 +174,15 @@ module.exports = {
 > 图中所请求图片资源其实是内嵌在css中，具体用法可看 [fis官方文档](http://fis.baidu.com/docs/more/fis-standard-inline.html#css)
 
 ### 文件监视 & 自动刷新
-虽然集成了 Browserify， watch 和 livereload 模式还是照样能支持，而且速度还是非常之快。执行 `mfn wL` 启用。
+虽然集成了 Browserify，Muffin 也同样支持 watch 和 livereload 模式，而且速度还是很快。执行 `mfn wL` 命令来启用。
 
 ### 发布目录整理
-执行 `mfn deploy`，可将项目输出至 ./public 目录，其目录非常整洁。
+执行 `mfn deploy` 可将项目输出至 ./public 目录，目录非常整洁。
 
 ![发布目录整理](assets/file.jpg)
 
 ### 自动测试
-使用 Browserify 方式，一些代码可直接运行在 node 环境上，当然就很轻松集成一些自动化测试框架，如 [jest](http://facebook.github.io/jest/docs/tutorial.html)
+使用 Browserify 方式，一些代码可直接运行在 node 环境上，当然这样可以很轻松地模拟浏览器环境，做到自动化测试，常用的测试框架如 [jest](http://facebook.github.io/jest/docs/tutorial.html)
 
 ### 更多特色
 因为 Muffin 是基于 FIS 二次开发，所有 FIS 的功能，如：前端三种语言能力、资源压缩、异构语言支持、静态资源加 md5 戳 & cdn 部署 等功能都能使用；具体请查看 [FIS 文档](http://fis.baidu.com/docs/beginning/getting-started.html)。
