@@ -1,11 +1,81 @@
-# fis-muffin
-FIS browerify 解决方案
+# FIS + Browserify = Muffin
 
-## 使用
+## 前言
+
+这段时间在做前端架构设计，需要选个好用的前端构建方案，之前[公司网站](http://www.zyeeda.com)有用过 [fis-pure](https://github.com/fex-team/fis-pure) ，因为这次需要用到 node 环境的一些自动化测试框架等一些需求， 所以 pure 就不太适合，因此就萌生出 [FIS](http://fis.baidu.com/) 集成 [Browserify](http://browserify.org/) 的方案。
+
+## 特色
+
+### 简化安装
+执行 `npm install -g fis-muffin` 命令便可安装，而且 muffin 天生支持 less、scss、coffee、react 多种语言
+
+### NPM 管理库
+项目采用 npm 管理 js 库依赖，方式完全跟 node 一样，下面是 [muffin-demo](https://github.com/cheft/muffin-demo) 的 package.json配置；有了它，只要执行 `npm install` 可安装所有依赖库
+```js    
+    {
+      "name": "muffin-demo",
+      "version": "1.0.0",
+      "description": "fis-muffin demo",
+      "author": "cheft",
+      "license": "ISC",
+      "devDependencies": {
+        "coffee-reactify": "^2.1.0"
+      },
+      "dependencies": {
+        "jquery": "^2.1.3",
+        "bootstrap": "^3.3.1",
+        "react": "^0.12.2"
+      }
+    }
+```
+> 如果你还要用到其它库，比如 underscore，可以用 npm install underscore --save 安装
+> 
+> 或者你要用到其它插件，如如 reactify，可以用 npm install reactify --save-dev 安装
+
+
+### 集成 Browserify
+Browserify 可以让你使用类似于 node 的 require() 方式来组织浏览器端的 Javascript 代码模块化
+```js
+    // hello.js
+    var hello = function(name) {
+        return 'Hello ' + name;
+    }
+
+    module.exports = hello;
+```
+
+```js
+    //index.js
+    var $ = require('jquery');
+    var hello = require('./hello');
+
+    $('body').append('<div>' + hello('Muffin') + '</div>');
+```
+
+muffin 默认是以 src/index.js 为入口文件，当然通过配置也可以修改
+
+  ```js
+       module.exports = {
+          settings: {
+              browserify: {
+                  main: 'index.coffee',  // 入口文件
+                  output: '_app.js',  // browserify 输出文件，不建议修改
+                  transform: 'coffee-reactify', // browserify 插件，可支持数组
+                  extension: '.coffee' // browserify 所要处理的文件
+              }
+          }
+      }
+  ```
+> browserify 支持多种插件，常用的有 coffee-reactify、reactify等
+
+### 命令简化
+只需 `mfn` 简单命令便可发布，`mfn start` 即开启浏览器预览
+
+![命令简化](assets/command.jpg)
 
 <table>
   <tr>
-    <th>FIS 命令</th><th>Muffin 对应命令</th><th>作用</th>
+    <th style="width: 33%;">FIS 命令</th><th>Muffin 命令</th><th style="width: 50%;">作用</th>
   </tr>
   <tr>
     <td>fis release</td><td>mfn</td><td>简单发布</td>
@@ -36,71 +106,10 @@ FIS browerify 解决方案
   </tr>
 </table>
 
-## 特点
-* FIS 集成 browerify，具备两工具功能，前端代码从此可以用 node 框架进行测试了
-* 简化命令行（`mfn = fis release`）并支持自定义，妈妈再也不用担心我 release 和 server 敲混了
-* `coffee`、`react`、`coffee&react` 语言支持，没有插件支持的告诉我，我来帮你写
-* `sass`、`less` 样式语言支持
-* 采用 node 方式代码模块化，写前端跟写 nodejs 后端一样的爽
-* 代码库采用 npm 管理，`npm install jquery --save` 一条命令搞定一个库
-* 所有 js 压缩打包成一个，不只；所有 css 压缩也能打包成一个，静态资源的路径自动更新哟
-* 图片优化压缩、碎小图片支持内嵌，fis 有的它都有
-* 发布后日志语句自动删除
-* 发布目录通过配置重新整理，还你干干净净
-* 支持 `watch` 方式开发，一边敲代码，一旁浏览器即时刷新；最重要的是编译性能非常之快
-* 支持在 js 中直接引入 css，没想到 css 也能模块化了，也不用担心忘记加载了
-
-## 进行中
-* 考虑支持编译预处理
-* 考虑支持引入 amd 、cmd、node 、global 的代码库
-* 考虑发布后提供 `requirejs-seed` 、`browserify-seed`、`global-seed`
-
-## 安装
-npm install -g fis-muffin
-
-## 目录结构
-    webapp
-      --assets
-        --index.css
-        --bg.png
-      --src (模块化代码库)
-        --index.js
-      --fis-conf.js
-      --index.html
-
-> 建议用此目录结构，当然你可以通过 fis-conf.js 修改
-
-> 在index.html的 head末尾加入以下代码 <!-- @require index.css --><!--STYLE_PLACEHOLDER--> 表示引入 css，
-> body末尾加入以下代码<!-- @require app --><!--SCRIPT_PLACEHOLDER--><!--RESOURCEMAP_PLACEHOLDER--> 表示引入 js
-
-## fis-conf配置
-
-    module.exports = {
-        settings: {
-            command: {
-                ...
-            },
-            browserify: {
-                ...
-            }
-        },
-        roadmap: {
-            ext: {
-                coffee: 'js'
-            },
-            path: [
-                {
-                  ... 
-                }
-            ]
-        }
-    }
-    fis.config.set('project.exclude', [...]);
-
-
-## 命令配置
-
-    module.exports = {
+> 如果上面命令不符合你的习惯，可以自己设置
+    
+```js
+  module.exports = {
         settings: {
             command: {
                 '': 'release -b',
@@ -115,18 +124,94 @@ npm install -g fis-muffin
             }
         }
     }
+```    
 
-## browserify 配置
+### CSS 模块化
+不仅 js 可以模块化，css 同样可以。muffin 的静态资源目录是 assets，其中的样式文件都约定了 id。 因此引用在 css 或 js 中通过 id 来引用样式文件：
 
-    module.exports = {
-        settings: {
-            browserify: {
-                main: 'index.coffee',
-                output: '_app.js',  //不建议修改
-                transform: 'coffee-reactify',
-                extension: '.coffee'
-            }
-        }
+```js
+  /*
+  * @require bootstrap.css
+  */
+```
+在 coffee-script 中：
+```coffee
+    ###
+    @require todo/todo.css
+    ###
+```
+
+在 html 中：
+```html
+    <!-- @require index.css -->
+```
+
+如果觉得 muffin 提供的默认配置不符合需求，也可以自己配置：
+```js
+module.exports = {
+    roadmap: {
+        path: [
+            {
+              reg : /^\/modules\/([^\/]+)\/assets\/index\.(css|scss|sass|less)$/i,
+              id : 'modules/$1.css',
+              release : 'css/$1/index.css'
+          },
+          {
+              reg : /^\/modules\/([^\/]+)\/assets\/(.*)$/i,
+              release : 'img/$1/$2'
+          }
+        ]
     }
+}
+```
+> 以上配置是将静态资源放在 modules 目录的每个模块下，每个模块自己管理静态资源，其它可自己扩展
 
-> 如果使用 browserify 的插件，如 coffee-reactify，需另外安装：npm install coffee-reactify --save-dev
+### 性能优化
+通过 `mfn op` 命令可将 js 打包一个文件，css 也打包一个文件；一些细碎的图片(特别是svg)，建议 直接内嵌到css中，可大幅减少请求数量，提升前端性能。
+
+![性能优化](assets/chrome.jpg)
+
+> 图中所请求图片资源其实是内嵌在css中，具体用法可看 [fis官方文档](http://fis.baidu.com/docs/more/fis-standard-inline.html#css)
+
+### 文件监视 & 自动刷新
+虽然集成了 Browserify，Muffin 也同样支持 watch 和 livereload 模式，而且速度还是很快。执行 `mfn wL` 命令来启用。
+
+### 发布目录整理
+执行 `mfn deploy` 可将项目输出至 ./public 目录，目录非常整洁。
+
+![发布目录整理](assets/file.jpg)
+
+### 自动测试
+使用 Browserify 方式，一些代码可直接运行在 node 环境上，当然这样可以很轻松地模拟浏览器环境，做到自动化测试，常用的测试框架如 [jest](http://facebook.github.io/jest/docs/tutorial.html)
+
+### 更多特色
+因为 Muffin 是基于 FIS 二次开发，所有 FIS 的功能，如：前端三种语言能力、资源压缩、异构语言支持、静态资源加 md5 戳 & cdn 部署 等功能都能使用；具体请查看 [FIS 文档](http://fis.baidu.com/docs/beginning/getting-started.html)。
+
+## 体验
+
+如果以上的 `特色` 打动了你，不妨从一个简单的 demo 开始休验 muffin 之旅吧。
+
+安装 muffin
+
+npm install -g fis-muffin
+
+下载 demo
+
+git clone https://github.com/cheft/muffin-demo.git
+
+进入当前目录后
+
+执行 `npm install` 安装第三方库
+
+执行 `mfn` 发布代码
+
+执行 `mfn start` 自动打开浏览器预览页面
+
+## 总结
+Muffin 具有各种特点能满足我们日常开发需求，另外 FIS 也拥有丰富的功能等着你去发掘。当然 Muffin 也有不足， Browserify 打包成一个js后，调试稍有不便，必须通过一些关键代码来查找原来代码所在位置，当然我相信这点点不足是不能成为阻碍的。
+
+## Roadmap
+* 支持编译预处理
+* 发布三种模式的源代码 `requirejs-seed` 、`browserify-seed`、`global-seed`
+* 更多等待您的反馈
+
