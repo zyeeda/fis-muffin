@@ -1,6 +1,6 @@
 {
   "name": "fis-muffin",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "FIS browerify 解决方案",
   "main": "muffin.js",
   "dependencies": {

@@ -150,9 +150,12 @@ function convertArgs(argv) {
     return argv;
 }
 
-function buildParams() {
+function buildParams(argv) {
     var conf = fis.config.get('settings.browserify');
     var params = '';
+    if(argv[3].indexOf('p') === -1) {
+        params += ' --debug '
+    }
     if(conf.transform) {
         if(conf.transform instanceof Array) {
             for(var i = 0; i < conf.transform.length; i++) {
@@ -181,7 +184,7 @@ fis.cli.run = function(argv){
         argv = convertArgs(argv);
         if(argv[2] === 'release' && argv[3] && argv[3].indexOf('b') != -1) {
             argv[3] = argv[3].replace('b', '');
-            var params = buildParams()
+            var params = buildParams(argv)
             if(argv[3].indexOf('w') !== -1) {
                 proc.exec(__dirname + '/node_modules/.bin/watchify ' + params, function(a, b, error) {
                     console.error(error);
