@@ -1,12 +1,12 @@
 {
   "name": "fis-muffin",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "FIS browerify 解决方案",
   "main": "muffin.js",
   "dependencies": {
     "browserify": "^8.0.3",
     "commander": "^1.3.2",
-    "fis": "latest",
+    "fis": "1.8.10",
     "fis-parser-coffee-react": "^1.0.1",
     "fis-parser-jsx-react": "^1.0.0",
     "fis-parser-less": "^0.1.2",
