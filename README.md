@@ -1,3 +1,7 @@
+# Deprecated
+
+这个项目只适用于 0.10 版本的 NodeJS 和 2.x 版本的 FIS。现在已经步入 Node 5.0 和 FIS 3.0 时代了，建议升级工具链，使用功能更强大的 Babel 和 Webpack。因此本项目将不再维护，仅作为实现参考，如果任何人有兴趣继续在新版本上支持此项目，欢迎 Fork。
+
 # Muffin=FIS+Browserify
 
 ## 前言
